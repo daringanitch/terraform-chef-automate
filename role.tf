@@ -73,7 +73,7 @@ resource "aws_iam_role_policy" "web_iam_role_policy" {
     {
       "Effect": "Allow",
       "Action": ["s3:ListBucket"],
-      "Resource": ["arn:aws:s3:::ist-chef-license"]
+      "Resource": ["arn:aws:s3:::your-bucket"]
     },
     {
       "Effect": "Allow",
@@ -82,7 +82,7 @@ resource "aws_iam_role_policy" "web_iam_role_policy" {
         "s3:GetObject",
         "s3:DeleteObject"
       ],
-      "Resource": ["arn:aws:s3:::ist-chef-license/*"]
+      "Resource": ["arn:aws:s3:::your-bucket/*"]
     }
   ]
 }
