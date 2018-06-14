@@ -44,8 +44,8 @@ resource "aws_instance" "chef-server" {
     while (curl http://localhost:8000/_status) | grep "fail"; do sleep 15s; done
 
     echo "Creating initial user and organization..."
-    chef-server-ctl user-create chefadmin Chef Admin ist@spe.sony.com Wabah204455 --filename /drop/chefadmin.pem
-    aws s3 cp /drop/chefadmin.pem  s3://ist-chef-license/
+    chef-server-ctl user-create chefadmin Chef Admin admin@example.com Passw0rd --filename /drop/chefadmin.pem
+    aws s3 cp /drop/chefadmin.pem  s3://bucketname/
     chef-server-ctl org-create ist "ist" --association_user chefadmin --filename ist.pem
     sleep 5
     chef-server-ctl install chef-manage
@@ -116,7 +116,7 @@ resource "aws_instance" "automate-server" {
       sleep 300
       aws s3 cp s3://ist-chef-license/chefadmin.pem /tmp/
       aws s3 cp s3://ist-chef-license/automate.license /tmp/
-      automate-ctl setup --license /tmp/automate.license --key /tmp/chefadmin.pem --server-url https://$chef_server_fqdn/organizations/ist --fqdn $(hostname) --enterprise default --configure --no-build-node
+      automate-ctl setup --license /tmp/automate.license --key /tmp/chefadmin.pem --server-url https://$chef_server_fqdn/organizations/default --fqdn $(hostname) --enterprise default --configure --no-build-node
       automate-ctl reconfigure
 
     # wait for all services to come online
@@ -126,7 +126,7 @@ resource "aws_instance" "automate-server" {
 
     # create an initial user
       echo "Creating chefadmin user..."
-      automate-ctl create-user default chefadmin --password Wabah204455 --roles "admin"
+      automate-ctl create-user default chefadmin --password Passw0rd --roles "admin"
     fi
 
 echo "Your Chef Automate server is ready!"
