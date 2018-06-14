@@ -28,7 +28,7 @@ resource "aws_instance" "chef-server" {
   fi
 
     # download the Chef server package
-  if [ ! -f /downloads/chef-server-core_12.17.33_amd64.deb ]; then
+  if [ ! -f /downloads/chef-server-core-12.17.33-1.el7.x86_64.rpm ]; then
     echo "Downloading the Chef server package..."
     wget -nv -P /downloads https://packages.chef.io/files/stable/chef-server/12.17.33/el/7/chef-server-core-12.17.33-1.el7.x86_64.rpm
   fi
@@ -99,7 +99,7 @@ resource "aws_instance" "automate-server" {
     fi
 
     # download the Chef Automate package
-    if [ ! -f /downloads/automate_1.8.38-1_amd64.deb ]; then
+    if [ ! -f /downloads/automate-1.8.68-1.el7.x86_64.rpm ]; then
       echo "Downloading the Chef Automate package..."
       wget -nv -P /downloads https://packages.chef.io/files/stable/automate/1.8.68/el/7/automate-1.8.68-1.el7.x86_64.rpm
     fi
