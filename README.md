@@ -32,7 +32,7 @@ Directions:
 1. Clone repo to your workstation
 2. obtain license key for automate from chef.io
 3. Create an s3 bucket in aws and upload you automate license to it.
-4. Modify the role.tf to reflect name of new s3 bucket.
+4. Modify the role.tf and instance.tf to reflect name of new s3 bucket.
 5. modify userdata in instances.tf to reflect new bucket name
 6. generate ssh key called mykey or pick a name and modify terrafrom modules (vars.tf and key.tf) to reflect new name.
 7. run "terraform init: in cloned repo directory
