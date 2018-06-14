@@ -29,24 +29,27 @@ Assumptions:
 
 Directions:
 
-Clone repo to your workstation
-obtain license key for automate from chef.io
-Create an s3 bucket in aws and upload you automate license to it.
-Modify the role.tf to reflect name of new s3 bucket.
-modify userdata in instances.tf to reflect new bucket name
-generate ssh key called mykey or pick a name and modify terrafrom modules (vars.tf and key.tf) to reflect new name.
-run "terraform init: in cloned repo directory
-run "terraform apply" in cloned directory
-login to aws and get the FQDN of the chef server 
-login to the automate server set variable
+1. Clone repo to your workstation
+2. obtain license key for automate from chef.io
+3. Create an s3 bucket in aws and upload you automate license to it.
+4. Modify the role.tf to reflect name of new s3 bucket.
+5. modify userdata in instances.tf to reflect new bucket name
+6. generate ssh key called mykey or pick a name and modify terrafrom modules (vars.tf and key.tf) to reflect new name.
+7. run "terraform init: in cloned repo directory
+8. run "terraform apply" in cloned directory
+9. login to aws and get the FQDN of the chef server 
+10. login to the automate server set variable
   chef_server_fqdn="FQDN chef server"
+  
   then run: 
+  
   automate-ctl setup --license /tmp/automate.license --key /tmp/chefadmin.pem --server-url https://$chef_server_fqdn/organizations/default --fqdn $(hostname) --enterprise default --configure --no-build-node
   
 
-troubleshoot if stuff goes wrong.
-reference material: https://learn.chef.io/modules/manage-a-node-chef-automate/rhel/automate/set-up-your-chef-server#/
+1. troubleshoot if stuff goes wrong.
+2. reference material: https://learn.chef.io/modules/manage-a-node-chef-automate/rhel/automate/set-up-your-chef-server#/
 
+Note:
 automate runs a preflight check , you can see the output file on the automate server in the tmp directory.
 errors may need to be fixed if automate isnt working correctly.
 
