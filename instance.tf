@@ -8,7 +8,7 @@ resource "aws_instance" "chef-server" {
 }
   tags {
         Name = "chef-server"
-        Department = "IST"
+        Department = "OPS"
     }
 
     iam_instance_profile = "${aws_iam_instance_profile.web_instance_profile.id}"
@@ -46,7 +46,7 @@ resource "aws_instance" "chef-server" {
     echo "Creating initial user and organization..."
     chef-server-ctl user-create chefadmin Chef Admin admin@example.com Passw0rd --filename /drop/chefadmin.pem
     aws s3 cp /drop/chefadmin.pem  s3://bucketname/
-    chef-server-ctl org-create ist "ist" --association_user chefadmin --filename ist.pem
+    chef-server-ctl org-create ist "default" --association_user chefadmin --filename default.pem
     sleep 5
     chef-server-ctl install chef-manage
     chef-server-ctl reconfigure
@@ -80,7 +80,7 @@ resource "aws_instance" "automate-server" {
 }
   tags {
         Name = "automate-server"
-        Department = "IST"
+        Department = "OPS"
     }
 
     iam_instance_profile = "${aws_iam_instance_profile.web_instance_profile.id}"
@@ -114,8 +114,8 @@ resource "aws_instance" "automate-server" {
 
     # run setup
       sleep 300
-      aws s3 cp s3://ist-chef-license/chefadmin.pem /tmp/
-      aws s3 cp s3://ist-chef-license/automate.license /tmp/
+      aws s3 cp s3://bucketname/chefadmin.pem /tmp/
+      aws s3 cp s3://bucketname/automate.license /tmp/
       automate-ctl setup --license /tmp/automate.license --key /tmp/chefadmin.pem --server-url https://$chef_server_fqdn/organizations/default --fqdn $(hostname) --enterprise default --configure --no-build-node
       automate-ctl reconfigure
 
