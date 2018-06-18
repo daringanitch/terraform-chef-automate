@@ -44,12 +44,13 @@ resource "aws_instance" "chef-server" {
     while (curl http://localhost:8000/_status) | grep "fail"; do sleep 15s; done
 
     echo "Creating initial user and organization..."
-    chef-server-ctl user-create chefadmin Chef Admin admin@example.com Passw0rd --filename /drop/chefadmin.pem
+    sudo chef-server-ctl user-create chefadmin Chef Admin admin@example.com Passw0rd --filename /drop/chefadmin.pem
+    echo $(curl -s http://169.254.169.254/latest/meta-data/local-hostname)>/drop/hostname.txt
     aws s3 cp /drop/chefadmin.pem  s3://bucketname/
-    chef-server-ctl org-create ist "default" --association_user chefadmin --filename default.pem
+    sudo chef-server-ctl org-create ist "default" --association_user chefadmin --filename default.pem
     sleep 5
-    chef-server-ctl install chef-manage
-    chef-server-ctl reconfigure
+    sudo chef-server-ctl install chef-manage
+    sudo chef-server-ctl reconfigure
     sudo ACCEPT_EULA=Yes chef-manage-ctl reconfigure
 
  fi
@@ -114,10 +115,12 @@ resource "aws_instance" "automate-server" {
 
     # run setup
       sleep 300
+      aws s3 cp s3://ist-chef-license/hostname.txt /tmp/
+      chef_server_fqdn=$(cat /tmp/hostname.txt)
       aws s3 cp s3://bucketname/chefadmin.pem /tmp/
       aws s3 cp s3://bucketname/automate.license /tmp/
-      automate-ctl setup --license /tmp/automate.license --key /tmp/chefadmin.pem --server-url https://$chef_server_fqdn/organizations/default --fqdn $(hostname) --enterprise default --configure --no-build-node
-      automate-ctl reconfigure
+      sudo automate-ctl setup --license /tmp/automate.license --key /tmp/chefadmin.pem --server-url https://$chef_server_fqdn/organizations/default --fqdn $(hostname) --enterprise default --configure --no-build-node
+      sudo automate-ctl reconfigure
 
     # wait for all services to come online
       echo "Waiting for services..."
@@ -126,7 +129,7 @@ resource "aws_instance" "automate-server" {
 
     # create an initial user
       echo "Creating chefadmin user..."
-      automate-ctl create-user default chefadmin --password Passw0rd --roles "admin"
+      sudo automate-ctl create-user default chefadmin --password Passw0rd --roles "admin"
     fi
 
 echo "Your Chef Automate server is ready!"
