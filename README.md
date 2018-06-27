@@ -37,13 +37,8 @@ Directions:
 6. generate ssh key called mykey or pick a name and modify terrafrom modules (vars.tf and key.tf) to reflect new name.
 7. run "terraform init: in cloned repo directory
 8. run "terraform apply" in cloned directory
-9. login to aws and get the FQDN of the chef server or get from aws ec2 console.
-10. login to the automate server set variable
-  chef_server_fqdn="FQDN chef server"
-  
-  then run: 
-  
-  automate-ctl setup --license /tmp/automate.license --key /tmp/chefadmin.pem --server-url https://$chef_server_fqdn/organizations/default --fqdn $(hostname) --enterprise default --configure --no-build-node
+
+Troubleshooting":
   
 
 1. troubleshoot if stuff goes wrong.
