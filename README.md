@@ -3,12 +3,12 @@ repo that automates the process of building automate and  chef servers (standalo
 
 What this builds:
 
-VPC with six subnets, three private and three public
-Security Group for chef and automate (you will need to lock it down)
-chef server v 12 (amazon linux)
-Automate server v 1 (amazon linux)
-two runner servers (amazon linux)
-installs and applys configuration for both servers via bash script loaded as userdata.
+1. VPC with six subnets, three private and three public
+2. Security Group for chef and automate (you will need to lock it down)
+3. Chef server v 12 (amazon linux)
+4. Automate server v 1 (amazon linux)
+5. Two runner servers (amazon linux)
+6. Installs and applys configuration for both servers via bash script loaded as userdata.
 
 
 Assumptions:
@@ -34,7 +34,7 @@ Directions:
 3. Create an s3 bucket in aws and upload you automate license to it.
 4. Modify the role.tf to reflect name of new s3 bucket.
 5. modify userdata in instances.tf to reflect new bucket name
-6. generate ssh key called mykey or pick a name and modify terrafrom modules (vars.tf and key.tf) to reflect new name.
+6. generate ssh key called mykey or pick a name and modify terrafrom modules (vars.tf and key.tf) to reflect new name of key.
 7. run "terraform init: in cloned repo directory
 8. run "terraform apply" in cloned directory
 9. lock down security group after everything is up, and add the Public IP addresses of your Chef and Automate servers to security group.
