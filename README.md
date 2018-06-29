@@ -131,3 +131,12 @@ chefadmin/linux-baseline
 chefadmin/windows-baseline
 
 If you need more, add them to the attributes default.rb in this cookbook. (check json formatting) and add profiles on the automate server.
+
+
+----------------------
+Install runners for Automate Workflow
+
+Log into Automate server:
+
+Example:
+automate-ctl install-runner FQDN USERNAME -i mykey
