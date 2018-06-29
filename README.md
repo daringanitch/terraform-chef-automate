@@ -124,7 +124,9 @@ clone this cookbook into your chef-repo cookbooks folder then upload to your che
 2. $berks install && berks upload.
 
 Add this cookbook to your nodes and make sure you have downloaded the correct security profiles on the automate server.
+
 current cookbook has these security profiles:
+
 chefadmin/linux-baseline 
 chefadmin/windows-baseline
 
