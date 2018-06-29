@@ -116,12 +116,12 @@ where my-automate-server.mycompany.com is the fully-qualified domain name of you
 ------------------------------------
 Automate Compliance:
 
-Use the following cookbook on to get compliance working on your nodes.
+Use the following cookbook on to get compliance working on your nodes:
 https://github.com/daringanitch/automate-compliance-cookbook.git
 
 clone this cookbook into your chef-repo cookbooks folder then upload to your chef server.
-$git clone https://github.com/daringanitch/automate-compliance-cookbook.git
-$berks install && berks upload.
+1. $git clone https://github.com/daringanitch/automate-compliance-cookbook.git
+2. $berks install && berks upload.
 
 Add this cookbook to your nodes and make sure you have downloaded the correct security profiles on the automate server.
 current cookbook has these security profiles:
