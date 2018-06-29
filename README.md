@@ -37,6 +37,7 @@ Directions:
 6. generate ssh key called mykey or pick a name and modify terrafrom modules (vars.tf and key.tf) to reflect new name.
 7. run "terraform init: in cloned repo directory
 8. run "terraform apply" in cloned directory
+9. lock down security group after everything is up, and add the Public IP addresses of your Chef and Automate servers to security group.
 
 Troubleshooting":
   
