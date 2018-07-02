@@ -1,6 +1,6 @@
 # Create an IAM role for the  Servers.
 resource "aws_iam_role" "s3_iam_role" {
-    name = "s3_iam_role"
+    name = "var.s3_iam_role"
     assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -18,12 +18,12 @@ resource "aws_iam_role" "s3_iam_role" {
 EOF
 }
 resource "aws_iam_instance_profile" "s3_instance_profile" {
-    name = "s3_instance_profile"
+    name = "var.s3_instance_profile"
     roles = ["web_iam_role"]
 }
 
 resource "aws_iam_role_policy" "s3_iam_role_policy" {
-  name = "s3_iam_role_policy"
+  name = "var.s3_iam_role_policy"
   role = "${aws_iam_role.s3_iam_role.id}"
   policy = <<EOF
 {
@@ -40,7 +40,7 @@ EOF
 }
 # Create an IAM role for the Web Servers.
 resource "aws_iam_role" "web_iam_role" {
-    name = "web_iam_role"
+    name = "var.web_iam_role"
     assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -59,12 +59,12 @@ EOF
 }
 
 resource "aws_iam_instance_profile" "web_instance_profile" {
-    name = "web_instance_profile"
+    name = "var.web_instance_profile"
     roles = ["web_iam_role"]
 }
 
 resource "aws_iam_role_policy" "web_iam_role_policy" {
-  name = "web_iam_role_policy"
+  name = "var.web_iam_role_policy"
   role = "${aws_iam_role.web_iam_role.id}"
   policy = <<EOF
 {
@@ -73,7 +73,7 @@ resource "aws_iam_role_policy" "web_iam_role_policy" {
     {
       "Effect": "Allow",
       "Action": ["s3:ListBucket"],
-      "Resource": ["arn:aws:s3:::your-bucket"]
+      "Resource": ["arn:aws:s3:::ist-chef-license"]
     },
     {
       "Effect": "Allow",
@@ -82,7 +82,7 @@ resource "aws_iam_role_policy" "web_iam_role_policy" {
         "s3:GetObject",
         "s3:DeleteObject"
       ],
-      "Resource": ["arn:aws:s3:::your-bucket/*"]
+      "Resource": ["arn:aws:s3:::ist-chef-license/*"]
     }
   ]
 }
