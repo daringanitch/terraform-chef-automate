@@ -49,7 +49,7 @@ resource "aws_instance" "chef-server" {
     echo $(curl -s http://169.254.169.254/latest/meta-data/local-hostname)>/drop/hostname.txt
     aws s3 cp /drop/chefadmin.pem s3://ist-chef-license/
     aws s3 cp /drop/hostname.txt s3://ist-chef-license/
-    sudo chef-server-ctl org-create ist "ist" --association_user chefadmin --filename ist.pem
+    sudo chef-server-ctl org-create myorg "myorg" --association_user chefadmin --filename myorg.pem
     sleep 5
     rpm -Uvh /downloads/chef-manage-2.5.16-1.el7.x86_64.rpm
     sudo chef-server-ctl reconfigure
