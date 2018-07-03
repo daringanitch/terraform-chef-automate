@@ -53,6 +53,6 @@ resource "aws_security_group" "automate" {
 
 tags {
     Name = "automate"
-    Department = "IST"
+    Department = "OPS"
   }
 }
