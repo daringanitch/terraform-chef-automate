@@ -158,7 +158,7 @@ resource "aws_instance" "runner1" {
 }
   tags {
         Name = "runner1"
-        Department = "IST"
+        Department = "OPS"
     }
 
     iam_instance_profile = "${aws_iam_instance_profile.web_instance_profile.id}"
@@ -191,7 +191,7 @@ resource "aws_instance" "runner2" {
 }
   tags {
         Name = "runner2"
-        Department = "IST"
+        Department = "OPS"
     }
     
     iam_instance_profile = "${aws_iam_instance_profile.web_instance_profile.id}"
