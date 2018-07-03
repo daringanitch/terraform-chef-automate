@@ -27,10 +27,11 @@ resource "aws_instance" "chef-server" {
       mkdir /downloads
   fi
 
-    # download the Chef server package
-  if [ ! -f /downloads/chef-server-core-12.17.33-1.el7.x86_64.rpm ]; then
+  # download the Chef server package
+  if [ ! -f /downloads/chef-server-core_12.17.33_amd64.rpm ]; then
     echo "Downloading the Chef server package..."
     wget -nv -P /downloads https://packages.chef.io/files/stable/chef-server/12.17.33/el/7/chef-server-core-12.17.33-1.el7.x86_64.rpm
+    wget -nv -P /downloads https://packages.chef.io/files/stable/chef-manage/2.5.16/el/7/chef-manage-2.5.16-1.el7.x86_64.rpm
   fi
 
 # install Chef server
@@ -46,12 +47,13 @@ resource "aws_instance" "chef-server" {
     echo "Creating initial user and organization..."
     sudo chef-server-ctl user-create chefadmin Chef Admin admin@example.com Passw0rd --filename /drop/chefadmin.pem
     echo $(curl -s http://169.254.169.254/latest/meta-data/local-hostname)>/drop/hostname.txt
-    aws s3 cp /drop/chefadmin.pem  s3://bucketname/
-    sudo chef-server-ctl org-create ist "default" --association_user chefadmin --filename default.pem
+    aws s3 cp /drop/chefadmin.pem s3://ist-chef-license/
+    aws s3 cp /drop/hostname.txt s3://ist-chef-license/
+    sudo chef-server-ctl org-create ist "ist" --association_user chefadmin --filename ist.pem
     sleep 5
-    sudo chef-server-ctl install chef-manage
+    rpm -Uvh /downloads/chef-manage-2.5.16-1.el7.x86_64.rpm
     sudo chef-server-ctl reconfigure
-    sudo ACCEPT_EULA=Yes chef-manage-ctl reconfigure
+    sudo chef-manage-ctl reconfigure
 
  fi
 
