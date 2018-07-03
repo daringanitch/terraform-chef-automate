@@ -52,7 +52,7 @@ resource "aws_security_group" "automate" {
 
 
 tags {
-    Name = "automate"
+    Name = "automate-chef-sg"
     Department = "OPS"
   }
 }
