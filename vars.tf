@@ -7,6 +7,9 @@ variable "PATH_TO_PRIVATE_KEY" {
 variable "PATH_TO_PUBLIC_KEY" {
   default = "mykey2.pub"
 }
+variable "s3_bucket_name" {
+  default = "ist-chef-license"
+}
 variable "AMIS" {
   type = "map"
   default = {
