@@ -19,6 +19,9 @@ variable "aws_iam_instance_profile" {
 variable "aws_iam_role_policy" {
   default = "tr_s3_iam_role_policy"
 }
+variable "aws_security_group" {
+  default = "automate2"
+}
 variable "AMIS" {
   type = "map"
   default = {
