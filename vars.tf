@@ -2,10 +2,10 @@ variable "AWS_REGION" {
   default = "us-west-2"
 }
 variable "PATH_TO_PRIVATE_KEY" {
-  default = "mykey3"
+  default = "mykey2"
 }
 variable "PATH_TO_PUBLIC_KEY" {
-  default = "mykey3.pub"
+  default = "mykey2.pub"
 }
 variable "s3_bucket_name" {
   default = "ist-chef-license"
