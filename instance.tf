@@ -16,7 +16,7 @@ resource "aws_instance" "chef-server" {
     #!/bin/bash
     sudo yum update
     sudo yum -y install curl
-    echo $(curl -s http://169.254.169.254/latest/meta-data/local-hostname) | xargs sudo hostname
+    echo $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) | xargs sudo hostname
     
 
     # create staging directories
@@ -91,7 +91,7 @@ resource "aws_instance" "automate-server" {
     #!/bin/bash
     sudo yum update
     sudo yum -y install curl
-    echo $(curl -s http://169.254.169.254/latest/meta-data/local-hostname) | xargs sudo hostname
+    echo $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) | xargs sudo hostname
     
 
     chef_server_fqdn=$1
