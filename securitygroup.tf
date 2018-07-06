@@ -1,6 +1,6 @@
 resource "aws_security_group" "automate" {
   vpc_id = "${aws_vpc.main.id}"
-  name = "automate"
+  name = "${var.aws_security_group}"
   description = "security group for automate and all egress traffic"
   egress {
       from_port = 0
@@ -52,7 +52,7 @@ resource "aws_security_group" "automate" {
 
 
 tags {
-    Name = "automate-chef-sg"
+    Name = "${var.aws_security_group}"
     Department = "OPS"
   }
 }
