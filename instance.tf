@@ -11,7 +11,7 @@ resource "aws_instance" "chef-server" {
         Department = "OPS"
     }
 
-    iam_instance_profile = "${aws_iam_instance_profile.web_instance_profile.id}"
+    iam_instance_profile = "${aws_iam_instance_profile.tr_s3_instance_profile.id}"
     user_data = <<HEREDOC
     #!/bin/bash
     sudo yum update
@@ -61,7 +61,7 @@ resource "aws_instance" "chef-server" {
 HEREDOC
 
 
- iam_instance_profile = "${aws_iam_instance_profile.web_instance_profile.id}"
+ iam_instance_profile = "${aws_iam_instance_profile.tr_s3_instance_profile.id}"
 
   # the VPC subnet
   subnet_id = "${aws_subnet.main-public-1.id}"
@@ -86,7 +86,7 @@ resource "aws_instance" "automate-server" {
         Department = "OPS"
     }
 
-    iam_instance_profile = "${aws_iam_instance_profile.web_instance_profile.id}"
+    iam_instance_profile = "${aws_iam_instance_profile.tr_s3_instance_profile.id}"
     user_data = <<HEREDOC
     #!/bin/bash
     sudo yum update
@@ -161,7 +161,7 @@ resource "aws_instance" "runner1" {
         Department = "OPS"
     }
 
-    iam_instance_profile = "${aws_iam_instance_profile.web_instance_profile.id}"
+    iam_instance_profile = "${aws_iam_instance_profile.tr_s3_instance_profile.id}"
     user_data = <<HEREDOC
     #!/bin/bash
     sudo yum update -y
@@ -194,7 +194,7 @@ resource "aws_instance" "runner2" {
         Department = "OPS"
     }
     
-    iam_instance_profile = "${aws_iam_instance_profile.web_instance_profile.id}"
+    iam_instance_profile = "${aws_iam_instance_profile.tr_s3_instance_profile.id}"
     user_data = <<HEREDOC
     #!/bin/bash
     sudo yum update -y
