@@ -20,7 +20,7 @@ EOF
 
 resource "aws_iam_instance_profile" "tr_s3_instance_profile" {
     name = "${var.aws_iam_instance_profile}"
-    roles = ["${var.aws_iam_role}"]
+    role = "${var.aws_iam_role}"
 }
 
   resource "aws_iam_role_policy" "tr_s3_iam_role_policy" {
