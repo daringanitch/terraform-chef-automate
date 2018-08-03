@@ -136,3 +136,28 @@ Log into Automate server:
 
 Example:
 automate-ctl install-runner FQDN USERNAME -i mykey
+
+---------------------------------------
+
+Workflow
+
+On Automate server at GUI, create workflow orginization
+example:  myorg
+under Admin tab
+
+create delivery user
+example:  delivery
+give admin rights
+
+generate public and private keys for user on your workstation. Upload the public key for the user in admin page.
+place private key in you workstation  user .ssh folder.
+
+Setup Delivery.
+move to the folder where your repo for is
+run: delivery setup --server=FQDN  --enterprise=default --org=myorg --user=delivery
+
+
+
+
+
+
